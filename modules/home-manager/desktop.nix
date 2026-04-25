@@ -1,5 +1,5 @@
 { ... }: {
-  flake.nixosModules.desktop-hm { pkgs, ... }: {
+  flake.nixosModules.desktop-hm = { pkgs, ... }: {
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
