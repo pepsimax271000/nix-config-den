@@ -1,5 +1,5 @@
 { ... }: {
-  flake.nixosModules.noctalia = { pkgs, ... }: {
+  flake.homeModules.noctalia = { pkgs, ... }: {
     programs.noctalia-shell = {
       enable = true;
       settings = {

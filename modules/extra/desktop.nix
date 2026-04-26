@@ -6,7 +6,9 @@
       enable = true;
       extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
     };
+  };
 
+  flake.modules.homeManager.desktop = { pkgs, ... }: {
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {

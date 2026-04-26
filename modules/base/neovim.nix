@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  flake.nixosModules.neovim = { pkgs, ... }: {
+{
+  flake.modules.homeManager.neovim = { config, pkgs, ... }: {
     programs.neovim = {
       enable = true;
       defaultEditor = true;
@@ -7,10 +7,10 @@
       vimAlias = true;
       extraPackages = with pkgs; [
         lua-language-server
-	nixd
-	tpescript-language-server
-	ripgrep
-	fd
+	      nixd
+	      typescript-language-server
+	      ripgrep
+	      fd
       ];
       plugins = with pkgs.vimPlugins; [
         lazy-nvim
