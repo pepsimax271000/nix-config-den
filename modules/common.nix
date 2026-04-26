@@ -1,0 +1,7 @@
+{ ... }: {
+  flake.common = {
+    username = "ye";
+    stateVersion = "25.11";
+    system = "x86_64-linux";
+  };
+}
