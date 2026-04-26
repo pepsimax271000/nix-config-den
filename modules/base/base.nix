@@ -1,9 +1,9 @@
-{ config, ... }: {
-  flake.nixosModules.base = { pkgs, ... }: {
+{ self, inputs, config, ... }: {
+  flake.nixosModules.base = { pkgs, lib, ... }: {
 
-    users.users.${config.cfg.user} = {
+    users.users.ye = {
       isNormalUser = true;
-      home = "/home/${config.cfg.user}";
+      home = "/home/ye";
       extraGroups = [ "wheel" "networkmanager" ];
       shell = pkgs.fish;
     };

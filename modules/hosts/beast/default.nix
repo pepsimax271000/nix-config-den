@@ -1,18 +1,17 @@
-{ inputs, self, ... }: {
+{ self, inputs, ... }: {
   flake.nixosConfigurations.beast = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      beast 
-      home  
+      self.nixosModules.beastConfiguration
     ];
   };
 
-  flake.nixosModules.beast = { pkgs, ... }: {
+  flake.nixosModules.beastConfiguration = { pkgs, lib, ... }: {
     imports = with self.nixosModules; [
       base
-      home
       shell
       desktop
       git
+      self.nixosModules.beastHardware
     ];
   };
 }

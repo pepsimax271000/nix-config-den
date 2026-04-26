@@ -1,4 +1,4 @@
-{
+{ self, inputs, ... }: {
   flake.nixosModules.shell = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       bat
