@@ -5,7 +5,7 @@
       disk = {
         main = {
           type = "disk";
-          device = "/dev/sda";
+          device = "/dev/disk/by-id/ata-V_Series_SATA_SSD_120GB_213810663701292";
           content = {
             type = "gpt";
             partitions = {
@@ -34,6 +34,10 @@
                     };
                     "@nix" = {
                       mountpoint = "/nix";
+                      mountOptions = [ "noatime" "compress-force=zstd:2" ];
+                    };
+                    "@.snapshots" = {
+                      mountpoint = "/.snapshots";
                       mountOptions = [ "noatime" "compress-force=zstd:2" ];
                     };
                   };
