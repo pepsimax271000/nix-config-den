@@ -1,5 +1,12 @@
 { ... }: {
-  flake.nixosModules.desktop-hm = { pkgs, ... }: {
+  flake.nixosModules.desktop = { pkgs, ... }: {
+    programs.hyprland.enable = true;
+    hardware.graphics.enable = true;
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    };
+
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {

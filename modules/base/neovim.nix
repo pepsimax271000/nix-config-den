@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  flake.nixosModules.neovim-hm = { pkgs, ... }:
+  flake.nixosModules.neovim = { pkgs, ... }: {
     programs.neovim = {
       enable = true;
       defaultEditor = true;
@@ -16,4 +16,5 @@
         lazy-nvim
       ];
     };
+  };
 }
