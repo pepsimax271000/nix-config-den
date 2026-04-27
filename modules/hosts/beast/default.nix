@@ -13,7 +13,7 @@
           imports = [
             self.homeModules.neovim
             self.homeModules.desktop
-            self.homeModules.noctalia
+            #self.homeModules.noctalia
           ];
         };
       }
@@ -24,5 +24,6 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
     ];
+    services.openssh.enable = true;
   };
 }

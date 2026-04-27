@@ -1,6 +1,7 @@
 { ... }: {
   flake.nixosModules.desktop = { pkgs, ... }: {
     programs.hyprland.enable = true;
+    programs.foot.enable = true;
     hardware.graphics.enable = true;
     xdg.portal = {
       enable = true;
