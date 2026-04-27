@@ -1,18 +1,13 @@
-{ self, inputs, lib, ... }: {
-  flake.nixosModules.home = { ... }: {
+{ self, inputs, ... }: {
+  flake.nixosModules.homeManager = { ... }: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
     ];
 
-    home-manager = {
-      users.ye = { config, pkgs, ... }: {
-        imports = [
-          self.homeModules.neovim
-        ];
-        home.stateVersion = "26.05";
-      };
-      useGlobalPkgs = true;
-      useUserPackages = true;
+    home-manager.useGlobalPkgs = true;
+    home-manager.useUserPackages = true;
+    home-manager.users.ye = { config, pkgs, ... }: {
+      home.stateVersion = "26.05";
     };
   };
   flake.homeModules.ye = { ... }: {
