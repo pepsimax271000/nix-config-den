@@ -8,7 +8,7 @@
     };
   };
 
-  flake.modules.homeManager.desktop = { pkgs, ... }: {
+  flake.homeModules.desktop = { pkgs, ... }: {
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {

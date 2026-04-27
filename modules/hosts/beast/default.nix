@@ -12,6 +12,8 @@
         home-manager.users.ye = {
           imports = [
             self.homeModules.neovim
+            self.homeModules.desktop
+            self.homeModules.noctalia
           ];
         };
       }

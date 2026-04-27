@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  flake.modules.homeManager.noctalia = { config, pkgs, ... }: {
+  flake.homeModules.noctalia = { config, pkgs, ... }: {
     programs.noctalia-shell = {
       enable = true;
       settings = {
