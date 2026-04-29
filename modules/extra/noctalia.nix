@@ -1,5 +1,8 @@
 { inputs, ... }: {
   flake.homeModules.noctalia = { config, pkgs, ... }: {
+    imports = [
+      inputs.noctalia.homeModules.default
+    ];
     programs.noctalia-shell = {
       enable = true;
       settings = {
@@ -11,8 +14,9 @@
           exclusive = true;
           outerCorners = false;
           monitors = [
-            "DP-2"
             "DP-1"
+            "DP-2"
+	    "HDMI-A-1"
             "LVDS-1"
           ];
           showCapsule = false;

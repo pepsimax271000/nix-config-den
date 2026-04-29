@@ -1,21 +1,57 @@
 { self, inputs, ... }: {
   flake.nixosModules.shell = { pkgs, ... }: {
+    programs.fish.enable = true;
+
     environment.systemPackages = with pkgs; [
-      bat
       btop
+      eza
       fd
-      fzf
       jq
       ripgrep
     ];
+  };
 
+  flake.homeModules.shell = { pkgs, ... }: {
     programs = {
-      yazi.enable = true;
-      zoxide.enable = true;
+      bat.enable = true;
+       
+      zoxide = {
+        enable = true;
+        enableFishIntegration = true;
+      };
+
+      btop = {
+        enable = true;
+	settings = {
+	  theme_background = false;
+	  rounded_corners = false;
+        };
+      };
+
+      fzf = {
+        enable = true;
+	enableFishIntegration = true;
+      };
+
+      yazi = {
+        enable = true;
+	enableFishIntegration = true;
+	shellWrapperName = "y";
+
+	settings = {
+	  manager = {
+	    linemode = "size";
+	    show_symlink = true;
+	    sort_by = "natural";
+	    sort_dir_first = true;
+	    sort_reverse = false;
+	    sort_sensitive = false;
+	  };
+        };
+      };
 
       fish = {
         enable = true;
-
         interactiveShellInit = ''
           set fish_greeting
           function fish_user_key_bindings
