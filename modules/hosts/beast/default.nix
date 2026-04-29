@@ -1,7 +1,6 @@
 { config, self, inputs, ... }: {
   flake.nixosConfigurations.beast = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      beastConfiguration
       audio
       base
       desktop
@@ -11,6 +10,7 @@
       shell
       stylix
       virtualization
+      beastConfiguration
       beastHardware
       homeManager
       {

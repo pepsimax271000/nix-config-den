@@ -1,12 +1,15 @@
-{ self, inputs, config, ... }: {
+{ self, inputs, ... }:
+let
+  cfg = self.nixosModules.userConfig;
+in {
   flake.nixosModules.base = { config, pkgs, lib, ... }: {
     imports = [
       inputs.sops-nix.nixosModules.sops
     ];
 
-    users.users.ye = {
+    users.users.${cfg.username} = {
       isNormalUser = true;
-      home = "/home/ye";
+      home = cfg.homeDir;
       extraGroups = [ "wheel" "networkmanager" ];
       shell = pkgs.fish;
       hashedPasswordFile = config.sops.secrets.password.path;
@@ -45,8 +48,8 @@
     
     networking.networkmanager.enable = true;
 
-    time.timeZone = "Europe/Belfast";
-    i18n.defaultLocale = "en_GB.UTF-8";
+    time.timeZone = cfg.timezone;
+    i18n.defaultLocale = cfg.locale;
 
     environment.systemPackages = with pkgs; [
       curl
@@ -85,6 +88,6 @@
       ModelBouncingKeys=1
     '';
 
-    system.stateVersion = "26.05";
+    system.stateVersion = cfg.stateVersion;
   };
 }
