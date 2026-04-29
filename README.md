@@ -3,13 +3,17 @@
 # my nixos config using flake-parts and the dendritic pattern
 
 ## hosts
+| | |
+|---|---|
 | heavy | ThinkPad W520 |
 | beast | Dual CPU HP Z620 |
 
 ---
 
-## Services
+## services
 
+| | |
+|---|---|
 | wm | hyprland + uwsm |
 | bar | noctalia-shell |
 | terminal | foot |
@@ -18,3 +22,4 @@
 | shell | fish |
 | file manager | yazi |
 | theming | stylix — catppuccin mocha, jetbrainsmono nerd font |
+
