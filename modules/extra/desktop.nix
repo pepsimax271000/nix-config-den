@@ -22,8 +22,8 @@
 	    scrollback-up-page = "Mod1+k";
 	    clipboard-copy = "Mod1+c";
 	    clipboard-paste = "Mod1+v";
-	    font-decrease = "Mod1+Shift+k";
-	    font-increase = "Mod1+Shift+j";
+	    font-decrease = "Mod1+Shift+j";
+	    font-increase = "Mod1+Shift+k";
 	    font-reset = "Mod1+Shift+l";
 	    search-start = "Mod1+slash";
 	  };

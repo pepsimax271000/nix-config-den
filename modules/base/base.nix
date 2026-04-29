@@ -1,11 +1,15 @@
 { self, inputs, config, ... }: {
-  flake.nixosModules.base = { pkgs, lib, ... }: {
+  flake.nixosModules.base = { config, pkgs, lib, ... }: {
+    imports = [
+      inputs.sops-nix.nixosModules.sops
+    ];
 
     users.users.ye = {
       isNormalUser = true;
       home = "/home/ye";
       extraGroups = [ "wheel" "networkmanager" ];
       shell = pkgs.fish;
+      hashedPasswordFile = config.sops.secrets.password.path;
     };
     
     nixpkgs.config.allowUnfree = true;
@@ -28,6 +32,12 @@
       ];
     };
 
+    sops = {
+      defaultSopsFile = ../../secrets/secrets.yaml;
+      age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      secrets.password = {};
+    };
+
     boot.loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -37,8 +47,6 @@
 
     time.timeZone = "Europe/Belfast";
     i18n.defaultLocale = "en_GB.UTF-8";
-
-
 
     environment.systemPackages = with pkgs; [
       curl

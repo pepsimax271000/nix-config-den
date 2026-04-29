@@ -43,16 +43,19 @@
           "zen.view.sidebar-expanded" = false;
           "zen.view.use-single-toolbar" = false;
           "zen.welcome-screen.seen" = true;
+	  "extensions.autoDisableScopes" = false;
         };
 
-        extensions.packages = with 
-	inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
-          ublock-origin
-          bitwarden
-          tridactyl
-          stylus
-          sponsorblock
-        ];
+        extensions = {
+	  packages = with 
+	    inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+              ublock-origin
+              bitwarden
+              tridactyl
+              stylus
+              sponsorblock
+            ];
+	};
         search = {
           force = true;
           default = "google";

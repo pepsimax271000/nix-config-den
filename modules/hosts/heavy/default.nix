@@ -13,16 +13,14 @@
       heavyHardware
       homeManager
       {
-        home-manager.users.ye = {
-          imports = [
-	    self.homeModules.browser
-	    self.homeModules.packages
-            self.homeModules.desktop
-            self.homeModules.neovim
-            self.homeModules.noctalia
-            self.homeModules.shell
-          ];
-        };
+        home-manager.users.ye.imports = with self.homeModules; [
+	    browser
+	    packages
+            desktop
+            neovim
+            noctalia
+            shell
+        ];
       }
     ];
   };
@@ -31,6 +29,7 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
     ];
+
     networking.hostName = "heavy";
     boot = {
       kernelModules = [ "acpi_call" "tp_smapi" ];

@@ -6,6 +6,11 @@
     import-tree.url = "github:vic/import-tree";
     hyprland.url = "github:hyprwm/Hyprland";
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     split-monitor-workspaces = {
       url = "github:zjeffer/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";

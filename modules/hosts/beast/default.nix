@@ -14,16 +14,14 @@
       beastHardware
       homeManager
       {
-        home-manager.users.ye = {
-          imports = [
-	    self.homeModules.browser
-	    self.homeModules.packages
-            self.homeModules.desktop
-            self.homeModules.neovim
-            self.homeModules.noctalia
-            self.homeModules.shell
-          ];
-        };
+        home-manager.users.ye.imports = with self.homeModules; [
+	    browser
+	    packages
+            desktop
+            neovim
+            noctalia
+            shell
+        ];
       }
     ];
   };
@@ -32,14 +30,15 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
     ];
+
+    networking.hostName = "beast";
+    hardware.graphics.enable = true;
+    services.xserver.videoDrivers = [ "nvidia" ];
+    services.openssh.enable = true;
     hardware.nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       modesetting.enable = true;
       open = false;
     };
-    networking.hostName = "beast";
-    hardware.graphics.enable = true;
-    services.xserver.videoDrivers = [ "nvidia" ];
-    services.openssh.enable = true;
   };
 }
