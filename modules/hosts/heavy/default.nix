@@ -1,16 +1,16 @@
 { config, self, inputs, ... }: {
-  flake.nixosConfigurations.beast = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.heavy = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      beastConfiguration
+      heavyConfiguration
+      audio
       base
+      desktop
       git
+      nfs
       services
       shell
       stylix
-      audio
-      desktop
-      virtualization
-      beastHardware
+      heavyHardware
       homeManager
       {
         home-manager.users.ye = {
@@ -27,7 +27,7 @@
     ];
   };
 
-  flake.nixosModules.beastConfiguration = { config, pkgs, lib, ... }: {
+  flake.nixosModules.heavyConfiguration = { config, pkgs, lib, ... }: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
     ];

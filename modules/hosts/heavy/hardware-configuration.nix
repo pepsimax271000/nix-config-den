@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.beastHardware = { config, lib, pkgs, modulesPath, ... }: {
+  flake.nixosModules.heavyHardware= { config, lib, pkgs, modulesPath, ... }: {
     imports =
       [ (modulesPath + "/installer/scan/not-detected.nix")
       ];
@@ -10,31 +10,31 @@
     boot.extraModulePackages = [ ];
 
     fileSystems."/" =
-      { device = "/dev/disk/by-uuid/771f416f-9ab2-4fc7-a3f5-8bd13dec55c6";
+      { device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
         fsType = "btrfs";
         options = [ "subvol=@" ];
       };
 
     fileSystems."/nix" =
-      { device = "/dev/disk/by-uuid/771f416f-9ab2-4fc7-a3f5-8bd13dec55c6";
+      { device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
         fsType = "btrfs";
-        options = [ "subvol=@nix" ];
+        options = [ "subvol=@nix"  ];
       };
 
     fileSystems."/.snapshots" =
-      { device = "/dev/disk/by-uuid/771f416f-9ab2-4fc7-a3f5-8bd13dec55c6";
+      { device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
         fsType = "btrfs";
         options = [ "subvol=@.snapshots" ];
       };
 
     fileSystems."/home" =
-      { device = "/dev/disk/by-uuid/771f416f-9ab2-4fc7-a3f5-8bd13dec55c6";
+      { device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
         fsType = "btrfs";
         options = [ "subvol=@home" ];
       };
 
     fileSystems."/boot" =
-      { device = "/dev/disk/by-uuid/8109-F978";
+      { device = "/dev/disk/by-uuid/5EE9-01AF";
         fsType = "vfat";
         options = [ "fmask=0177" "dmask=0077" ];
       };

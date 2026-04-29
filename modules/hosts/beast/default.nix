@@ -2,13 +2,14 @@
   flake.nixosConfigurations.beast = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       beastConfiguration
+      audio
       base
+      desktop
       git
+      nfs
       services
       shell
       stylix
-      audio
-      desktop
       virtualization
       beastHardware
       homeManager

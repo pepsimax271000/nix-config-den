@@ -1,5 +1,5 @@
-{ inputs, ... }: {
-  flake.nixosModules.desktop = { pkgs, ... }: {
+{ inputs, lib, ... }: {
+  flake.nixosModules.desktop = { pkgs, lib, ... }: {
     hardware.graphics.enable = true;
     programs.hyprland = {
       enable = true;
@@ -88,23 +88,36 @@
           "$mod, 7, workspace, 7"
           "$mod, 8, workspace, 8"
           "$mod, 9, workspace, 9"
-          "$mod shift 1, movetoworkspace, 1"
-          "$mod shift 2, movetoworkspace, 2"
-          "$mod shift 3, movetoworkspace, 3"
-          "$mod shift 4, movetoworkspace, 4"
-          "$mod shift 5, movetoworkspace, 5"
-          "$mod shift 6, movetoworkspace, 6"
-          "$mod shift 7, movetoworkspace, 7"
-          "$mod shift 8, movetoworkspace, 8"
-          "$mod shift 9, movetoworkspace, 9"
+          "$mod shift, 1, movetoworkspace, 1"
+          "$mod shift, 2, movetoworkspace, 2"
+          "$mod shift, 3, movetoworkspace, 3"
+          "$mod shift, 4, movetoworkspace, 4"
+          "$mod shift, 5, movetoworkspace, 5"
+          "$mod shift, 6, movetoworkspace, 6"
+          "$mod shift, 7, movetoworkspace, 7"
+          "$mod shift, 8, movetoworkspace, 8"
+          "$mod shift, 9, movetoworkspace, 9"
         ];
         general = {
           gaps_in = 0;
           gaps_out = 0;
-          border_size = 2;
+          border_size = 3;
+	  "col.active_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base04})";
+	  "col.inactive_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base09})";
         };
+	animations.enabled = false;
+	decoration = {
+	  shadow = {
+	    enabled = true;
+	    offset = "5 5";
+	    color = lib.mkForce "rgba(${config.lib.stylix.colors.base00}ff)";
+	  };
+	};
         input = {
           kb_layout = "gb";
+	  kb_options = "ctrl:nocaps";
+	  repeat_delay = "300";
+	  repeat_rate = "50";
         };
 	exec-once = [
 	  "noctalia-shell"
