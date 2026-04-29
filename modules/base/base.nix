@@ -1,6 +1,6 @@
-{ self, inputs, ... }:
+{ config, self, inputs, ... }:
 let
-  cfg = self.nixosModules.userConfig;
+  cfg = self.userConfig;
 in {
   flake.nixosModules.base = { config, pkgs, lib, ... }: {
     imports = [

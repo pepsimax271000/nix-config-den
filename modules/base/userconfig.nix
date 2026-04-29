@@ -1,5 +1,5 @@
 { self, lib, ... }: {
-  flake.nixosModules.userConfig = rec {
+  flake.userConfig = rec {
     username    = "ye";
     email       = "248238336+pepsimax271000@users.noreply.github.com";
     gitName     = "pepsimax271000";

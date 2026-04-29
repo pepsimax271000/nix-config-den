@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 let
-  cfg = self.nixosMoudles.userConfig;
+  cfg = self.userConfig;
 in {
   flake.nixosModules.homeManager = { ... }: {
     imports = [
