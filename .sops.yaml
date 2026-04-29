@@ -1,6 +1,8 @@
 keys:
   - &heavy_user age178f7dvqqr4r2k06fj3u5lrmg4n4qzu5u2q03vwjes42n5dajnaeshxnn69
   - &heavy_host age1lakwj5gtc8sjksshhy850eqeh4ac7gkp39xecqhngaldr5xj7ayqvz6yj3
+  - &beast_user age1df073aud9a2y8rukr553cln9a75cfw30nh4czytaemjgsmnuh3sszktve0
+  - &beast_host age14002ye36h029nh99wqwv8j7kacydsscplf6mkl6mmfgm6lyxlsys88jhvt
 
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
@@ -8,3 +10,5 @@ creation_rules:
         - age:
             - *heavy_user
             - *heavy_host
+            - *beast_user
+            - *beast_host
