@@ -11,15 +11,17 @@
       shell
       stylix
       heavyHardware
+      heavyDisko
       homeManager
+      inputs.disko.nixosModules.disko
       {
         home-manager.users.ye.imports = with self.homeModules; [
-	    browser
-	    packages
-            desktop
-            neovim
-            noctalia
-            shell
+	        browser
+	        packages
+          desktop
+          neovim
+          noctalia
+          shell
         ];
       }
     ];

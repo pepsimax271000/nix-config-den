@@ -1,11 +1,11 @@
 { inputs, ... }: {
   imports = [ inputs.disko.flakeModules.default ];
-  flake.nixosModules.heavyDisko = {
+  flake.nixosModules.vmDisko = {
     disko.devices = {
       disk = {
         main = {
           type = "disk";
-          device = "/dev/sda";
+          device = "/dev/vda";
           content = {
             type = "gpt";
             partitions = {
