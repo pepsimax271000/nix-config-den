@@ -16,8 +16,8 @@
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
-	        browser
-	        packages
+	  browser
+	  packages
           desktop
           neovim
           noctalia

@@ -1,7 +1,6 @@
 { config, self, inputs, ... }: {
   flake.nixosConfigurations.heavy = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      heavyConfiguration
       audio
       base
       desktop
@@ -10,14 +9,13 @@
       services
       shell
       stylix
+      heavyConfiguration
       heavyHardware
-      heavyDisko
       homeManager
-      inputs.disko.nixosModules.disko
       {
         home-manager.users.ye.imports = with self.homeModules; [
-	        browser
-	        packages
+	  browser
+	  packages
           desktop
           media
           neovim
@@ -45,7 +43,16 @@
         "i915.enable_rc6=1"
         "i915.enable_fbc=1"
       ];
-
+      extraModprobeConfig = ''
+        blacklist nouveau
+	options nouveau modeset=0
+      '';
+      blacklistedKernelModules = [
+        "nouveau"
+	"nvidia"
+	"nvidia_drm"
+	"nvidia_modeset"
+      ];
     };
 
     powerManagement = {
@@ -71,5 +78,19 @@
     nixpkgs.config.packageOverrides = pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
     };
+
+    services.udev.extraRules = ''
+      # Remove NVIDIA USB xHCI Host Controller devices, if present
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
+  
+      # Remove NVIDIA USB Type-C UCSI devices, if present
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
+  
+      # Remove NVIDIA Audio devices, if present
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
+  
+      # Remove NVIDIA VGA/3D controller devices
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
+    '';
   };
 }

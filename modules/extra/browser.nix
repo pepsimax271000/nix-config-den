@@ -66,10 +66,6 @@
                 {
                   template = "https://google.com/search?q={searchTerms}";
                   params = [
-                    {
-                      name = "query";
-                      value = "searchTerms";
-                    }
                   ];
                 }
               ];

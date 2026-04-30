@@ -102,8 +102,8 @@
           gaps_in = 0;
           gaps_out = 0;
           border_size = 3;
-	  "col.active_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base04})";
-	  "col.inactive_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base09})";
+	  "col.active_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base09})";
+	  "col.inactive_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base04})";
         };
 	animations.enabled = false;
 	decoration = {
