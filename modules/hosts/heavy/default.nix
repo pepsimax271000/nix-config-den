@@ -16,22 +16,13 @@
       inputs.disko.nixosModules.disko
       {
         home-manager.users.ye.imports = with self.homeModules; [
-<<<<<<< HEAD
 	        browser
 	        packages
           desktop
+          media
           neovim
           noctalia
           shell
-=======
-	    browser
-	    packages
-            desktop
-	    media
-            neovim
-            noctalia
-            shell
->>>>>>> 6a639f8 (merge)
         ];
       }
     ];
