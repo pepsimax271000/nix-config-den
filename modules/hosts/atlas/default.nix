@@ -1,5 +1,5 @@
 { config, self, inputs, ... }: {
-  flake.nixosConfigurations.beast = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.atlas = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       audio
       base
@@ -11,8 +11,8 @@
       shell
       stylix
       virtualization
-      beastConfiguration
-      beastHardware
+      atlasConfiguration
+      atlasHardware
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
@@ -28,7 +28,7 @@
     ];
   };
 
-  flake.nixosModules.beastConfiguration = { config, pkgs, lib, ... }: {
+  flake.nixosModules.atlasConfiguration = { config, pkgs, lib, ... }: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
     ];
@@ -48,6 +48,7 @@
         options amdgpu ppfeaturemask=0xffffffff
         options amdgpu overdrive=1
       '';
+    };
 
     hardware = {
       cpu.amd.updateMicrocode = true;

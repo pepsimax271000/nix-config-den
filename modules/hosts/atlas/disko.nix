@@ -1,6 +1,6 @@
 { inputs, ... }: {
   imports = [ inputs.disko.flakeModules.default ];
-  flake.diskoConfigurations.beast = {
+  flake.diskoConfigurations.atlas = {
     disko.devices = {
       disk = {
         main = {
