@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  flake.nixosModules.media = { pkgs, ... }: {
+  flake.homeModules.media = { pkgs, ... }: {
     home.packages = with pkgs; [ 
       jellyfin-tui
       imv

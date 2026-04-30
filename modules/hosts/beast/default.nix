@@ -16,6 +16,7 @@
       {
         home-manager.users.ye.imports = with self.homeModules; [
 	    browser
+	    media
 	    packages
             desktop
             neovim

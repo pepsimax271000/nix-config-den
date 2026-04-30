@@ -7,12 +7,15 @@ in {
       inputs.sops-nix.nixosModules.sops
     ];
 
-    users.users.${cfg.username} = {
-      isNormalUser = true;
-      home = cfg.homeDir;
-      extraGroups = [ "wheel" "networkmanager" ];
-      shell = pkgs.fish;
-      hashedPasswordFile = config.sops.secrets.password.path;
+    users.users = {
+      root.hashedPasswordFile = config.sops.secrets.password.path;
+      ${cfg.username} = {
+        isNormalUser = true;
+        home = cfg.homeDir;
+        extraGroups = [ "wheel" "networkmanager" ];
+        shell = pkgs.fish;
+        hashedPasswordFile = config.sops.secrets.password.path;
+      };
     };
     
     nixpkgs.config.allowUnfree = true;
@@ -39,6 +42,7 @@ in {
       defaultSopsFile = ../../secrets/secrets.yaml;
       age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       secrets.password = {};
+      secrets.password.neededForUsers = true;
     };
 
     boot.loader = {
