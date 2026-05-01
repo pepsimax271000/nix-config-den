@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ config, inputs, ... }: {
   flake.nixosConfigurations.iso = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
@@ -14,9 +14,11 @@
           fastfetch
         ];
 
+        users.users.root.initialPassword = "nixos";
+
         users.users.nixos = {
           isNormalUser = true;
-          password = "nixos";
+          initialPassword = "nixos";
           extraGroups = [ "wheel" ];
           openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWKYIrwL21t4Q/hbGUmLuVFOb1b77OHjbL0vqSo13kc ye@atlas"

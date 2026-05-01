@@ -3,7 +3,9 @@ keys:
   - &heavy_host age1lakwj5gtc8sjksshhy850eqeh4ac7gkp39xecqhngaldr5xj7ayqvz6yj3
   - &beast_user age1df073aud9a2y8rukr553cln9a75cfw30nh4czytaemjgsmnuh3sszktve0
   - &beast_host age14002ye36h029nh99wqwv8j7kacydsscplf6mkl6mmfgm6lyxlsys88jhvt
-  - &vm_host age10qy3hjv9lh8r3eyqgkplsd2mg583tj93vyxn00jn3ly9fv64l9ss627gu8
+  - &vm_host age1jufye77tt63gpjuuurmuzd3vzvmfj4gve25d9dnnfum5zncas37qftkhfh
+  - &atlas_user age1x5mapzr2pcswvela9nmdah6uzrv4csthupk2vkslwjpne32m6d3syp9nst
+  - &chell_host age1szzurdrppevemlyc5zaydewskwhfcmndf7g0jmd7an3gds8qtvwq9p2q6t
 
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
@@ -14,3 +16,5 @@ creation_rules:
             - *beast_user
             - *beast_host
             - *vm_host
+            - *atlas_user
+            - *chell_host

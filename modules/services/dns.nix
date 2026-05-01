@@ -1,8 +1,14 @@
-{ ... }:
+{ ... }: {
   flake.nixosModules.dns = { config, ... }: {
     services.caddy.virtualHosts."adguard.${config.homelab.domain}".extraConfig = ''
       reverse_proxy "localhost:3000"
     '';
+
+    networking.firewall = {
+      allowedUDPPorts = [ 5335 ];
+      allowedTCPPorts = [ 5335 ];
+    };
+
     services = {
       unbound = {
         enable = true;
@@ -175,8 +181,6 @@
         };
       };
 
-    networking.firewall = {
-      allowedUDPPorts = [ 5335 ];
-      allowedTCPPorts = [ 5335 ];
     };
+  };
 }

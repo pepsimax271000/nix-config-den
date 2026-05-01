@@ -1,8 +1,9 @@
 { ... }: {
-  flake.nixos modules.caddy = { config, ... }:
+  flake.nixosModules.caddy = { config, lib, ... }: {
+    systemd.services.caddy.serviceConfig.EnvironmentFile = config.sops.secrets.cloudflare-email.path;
     security.acme = {
       acceptTerms = true;
-      defaults.email = builtins.readFile email;
+      defaults.email = lib.mkDefault "";
       certs."${config.homelab.domain}" = {
         domain = config.homelab.domain;
         extraDomainNames = [ "*.${config.homelab.domain}" ];
@@ -10,7 +11,7 @@
         group = "acme";
         dnsResolver = "1.1.1.1:53";
         dnsPropagationCheck = true;
-        environmentFile = api;
+        environmentFile = config.sops.secrets.cloudflare-api.path;
       };
     };
   
@@ -23,3 +24,4 @@
     };
   };
 }
+
