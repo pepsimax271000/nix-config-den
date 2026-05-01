@@ -11,7 +11,7 @@
         image = "ghcr.io/home-assistant/home-assistant:stable";
         extraOptions = [ 
           "--network=host"
-          "--device=/dev/ttyACM0:/dev/ttyACM0"
+          # "--device=/dev/ttyACM0:/dev/ttyACM0" ### it *needs* the /dev/ttyACM0 device plugged in or else it will fail to start homeassistant
         ];
       };
     };
