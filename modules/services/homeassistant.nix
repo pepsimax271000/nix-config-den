@@ -3,6 +3,12 @@
     services.caddy.virtualHosts."homeassistant.${config.homelab.domain}".extraConfig = ''
       reverse_proxy "localhost:8080"
     '';
+
+    networking.firewall = {
+      allowedUDPPorts = [ 8080 ];
+      allowedTCPPorts = [ 8080 ];
+    };
+
     virtualisation.oci-containers = {
       backend = "podman";
       containers.homeassistant = {
