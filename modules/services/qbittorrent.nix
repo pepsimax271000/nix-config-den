@@ -11,21 +11,21 @@
     services = {
       qbittorrent = {
         enable = true;
-	profileDir = "${config.homelab.appdataDir}/qbittorrent";
-	General.Locale = "en";
+	      profileDir = "${config.homelab.appdataDir}/qbittorrent";
+	      General.Locale = "en";
         serverConfig = {
           LegalNotice.Accepted = true;
           Preferences = {
             User = config.homelab.user;
             Group = config.homelab.group;
-	    Downloads = {
-	      SavePath = "${config.homelab.mediaDir}/torrents";
-	    };
-	    WebUI = {
-	      Username = "adam";
-	      Password_PBKDF2 = "${config.sops.secrets.qbittorrent_password.path}";
-	      ServerDomains = "${config.homelab.domain}";
-	    };
+	        Downloads = {
+	          SavePath = "${config.homelab.mediaDir}/torrents";
+	        };
+	        WebUI = {
+	          Username = "adam";
+	          Password_PBKDF2 = "${config.sops.secrets.qbittorrent_password.path}";
+	          ServerDomains = "${config.homelab.domain}";
+	        };
           };
         };
       };

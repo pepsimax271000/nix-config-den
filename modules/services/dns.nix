@@ -17,7 +17,7 @@
         settings = {
           dns = {
             upstream_dns = [
-	      "https://dns.quad9.net/dns-query"
+	          "https://dns.quad9.net/dns-query"
               "tls://dns.quad9.net"
             ];
             bootstrap_dns = [
@@ -26,7 +26,7 @@
               "2620:fe::10"
               "2620:fe::fe:10"
             ];
-	    upstream_mode = "parallel";
+	          upstream_mode = "parallel";
             local_domain_name = "${config.homelab.domain}";
             cache_enabled = true;
             cache_ttl_min = 3600;

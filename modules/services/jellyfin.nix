@@ -11,12 +11,12 @@
     services = {
       jellyfin = {
         enable = true;
-	configDir = "${config.homelab.appdataDir}/jellyfin/config";
-	dataDir = "${config.homelab.appdataDir}/jellyfin";
-	cacheDir = "${config.homelab.appdataDir}/jellyfin/config/cache";
-	logDir = "${config.homelab.appdataDir}/jellyfin/config/log";
-	user = config.homelab.user;
-	group = config.homelab.group;
+	      configDir = "${config.homelab.appdataDir}/jellyfin/config";
+	      dataDir = "${config.homelab.appdataDir}/jellyfin";
+	      cacheDir = "${config.homelab.appdataDir}/jellyfin/config/cache";
+	      logDir = "${config.homelab.appdataDir}/jellyfin/config/log";
+	      user = config.homelab.user;
+	      group = config.homelab.group;
       };
     };
     hardware.graphics = {

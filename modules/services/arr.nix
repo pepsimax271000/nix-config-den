@@ -15,27 +15,27 @@
     networking.firewall = {
       allowedUDPPorts = [ 
         7878
-	8989
-	9696
+	      8989
+	      9696
       ];
       allowedTCPPorts = [ 
         7878
-	8989
-	9696
+	      8989
+	      9696
       ];
     };
     services = {
       radarr = {
         enable = true;
-	dataDir = "${config.homelab.appdataDir}/radarr";
+	      dataDir = "${config.homelab.appdataDir}/radarr";
       };
       sonarr = {
         enable = true;
-	dataDir = "${config.homelab.appdataDir}/sonarr";
+	      dataDir = "${config.homelab.appdataDir}/sonarr";
       };
       prowlarr = {
         enable = true;
-	dataDir = "${config.homelab.appdataDir}/prowlarr";
+	      dataDir = "${config.homelab.appdataDir}/prowlarr";
       };
       flaresolverr = {
         enable = true;
