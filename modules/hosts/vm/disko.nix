@@ -3,47 +3,52 @@
   flake.nixosModules.vmDisko = {
     disko.devices = {
       disk = {
-        main = {
+        vda = {
           type = "disk";
           device = "/dev/vda";
           content = {
-            type = "gpt";
-            partitions = {
-              boot = {
-                size = "512M";
-                type = "EF00"; # EFI System Partition
+            type = "table";
+            format = "msdos"; # MBR partition table
+            partitions = [
+              {
+                name = "boot";
+                start = "1MiB";
+                end = "512MiB"; # 2GB for boot
+                bootable = true; # Mark bootable for MBR
                 content = {
                   type = "filesystem";
-                  format = "vfat";
+                  format = "ext4";
                   mountpoint = "/boot";
                 };
-              };
-              root = {
-                size = "100%";
+              }
+              {
+                name = "root";
+                start = "2GiB";
+                end = "100%"; # Use remaining space
                 content = {
                   type = "btrfs";
-                  extraArgs = ["-f"];
+                  extraArgs = [ "-f" ]; # Force format
                   subvolumes = {
-                    "@" = {
+                    "root" = {
                       mountpoint = "/";
-                      mountOptions = [ "noatime" "compress-force=zstd:2" ];
+                      mountOptions = [ "compress=zstd" "noatime" ];
                     };
-                    "@home" = {
+                    "home" = {
                       mountpoint = "/home";
-                      mountOptions = [ "noatime" "compress-force=zstd:2" ];
+                      mountOptions = [ "compress=zstd" "noatime" ];
                     };
-                    "@nix" = {
+                    "nix" = {
                       mountpoint = "/nix";
-                      mountOptions = [ "noatime" "compress-force=zstd:2" ];
+                      mountOptions = [ "compress=zstd" "noatime" ];
                     };
-                    "@.snapshots" = {
+                    "snapshots" = {
                       mountpoint = "/.snapshots";
-                      mountOptions = [ "noatime" "compress-force=zstd:2" ];
+                      mountOptions = [ "compress=zstd" "noatime" ];
                     };
                   };
                 };
-              };
-            };
+              }
+            ];
           };
         };
       };

@@ -16,8 +16,8 @@
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
-	  browser
-	  packages
+	        browser
+	        packages
           desktop
           neovim
           noctalia
@@ -36,5 +36,11 @@
     hardware.graphics.enable = true;
     services.qemuGuest.enable = true;
     services.openssh.enable = true;
+    boot.loader.systemd-boot.enable = false;
+    boot.loader.efi.canTouchEfiVariables = false;
+    boot.loader.grub = {
+      enable  = true;
+      device  = "/dev/vda";
+    };
   };
 }
