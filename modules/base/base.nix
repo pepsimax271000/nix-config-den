@@ -45,9 +45,12 @@ in {
       secrets.password.neededForUsers = true;
     };
 
-    boot.loader = {
-      systemd-boot.enable = lib.mkDefault true;
-      efi.canTouchEfiVariables = lib.mkDefault true;
+    boot = {
+      kernelPackages = pkgs.linuxPackages_latest;
+      loader = {
+        systemd-boot.enable = lib.mkDefault true;
+        efi.canTouchEfiVariables = lib.mkDefault true;
+      };
     };
     
     networking.networkmanager.enable = true;
