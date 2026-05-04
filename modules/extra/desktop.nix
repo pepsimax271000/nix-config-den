@@ -31,6 +31,37 @@
 	};
       };
     };
+    services.hypridle = {
+      enable = true;
+      settings = {
+        general = {
+	  lock_cmd = "pidof noctalia || noctalia-shell ipc call lockScreen lock";
+	  before_sleep_cmd = "loginctl lock-session";
+	  after_sleep_cmd = "hyprctl dispatch dpms on";
+	};
+
+	listener = [
+	  {
+	    timeout = 300;
+	    on-timeout = "brightnessctl -s set 10";
+	    on-resume = "brightnessctl -r";
+	  }
+	  {
+	    timeout = 1800;
+	    on-timeout = "loginctl lock-session";
+	  }
+	  {
+	    timeout = 1500;
+	    on-timeout = "hyprctl dispatch dpms off";
+	    on-resume= "hyprctl dispatch dpms on";
+	  }
+	  {
+	    timeout = 4500;
+	    on-timeout = "systemctl suspend";
+	  }
+	];
+      };
+    };
     wayland.windowManager.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -61,26 +92,29 @@
         bind = [
 	  "$mod, Q, killactive"
           "$mod, F, fullscreen"
-          "$mod shift, Space, togglefloating"
+          "$mod Shift, Space, togglefloating"
           "$mod, h, resizeactive, -100 0"
           "$mod, j, movefocus, l"
           "$mod, k, movefocus, r"
           "$mod, l, resizeactive, 100 0"
-          "$mod shift, h, movewindow, l"
-          "$mod shift, j, movewindow, d"
-          "$mod shift, k, movewindow, u"
-          "$mod shift, l, movewindow, r"
-          "$mod ctrl, j, movefocus, d"
-          "$mod ctrl, k, movefocus, u"
-          "$mod, s, pin"
-          "$mod, a, exec, noctalia-shell ipc call bar toggle"
+          "$mod Shift, h, movewindow, l"
+          "$mod Shift, j, movewindow, d"
+          "$mod Shift, k, movewindow, u"
+          "$mod Shift, l, movewindow, r"
+          "$mod Ctrl, j, movefocus, d"
+          "$mod Ctrl, k, movefocus, u"
           "$mod, Return, exec, foot"
+	  "$mod, Backspace, exec, noctalia-shell ipc call lockScreen lock"
           "$mod, Q, killactive"
           "$mod, W, exec, zen-beta"
 	  "$mod, E, exec, noctalia-shell ipc call launcher emoji"
 	  "$mod, R, exec, foot -e yazi"
+          "$mod, A, exec, noctalia-shell ipc call bar toggle"
+          "$mod, S, pin"
 	  "$mod, D, exec, noctalia-shell ipc call launcher toggle"
           "$mod, F, exec, fullscreen"
+	  "$mod, V, exec, noctalia-shell ipc call launcher clipboard"
+	  "$mod, M, exec, foot -e jellyfin-tui"
           "$mod, 1, split-workspace, 1"
           "$mod, 2, split-workspace, 2"
           "$mod, 3, split-workspace, 3"
@@ -90,15 +124,15 @@
           "$mod, 7, split-workspace, 7"
           "$mod, 8, split-workspace, 8"
           "$mod, 9, split-workspace, 9"
-          "$mod shift, 1, split-movetoworkspace, 1"
-          "$mod shift, 2, split-movetoworkspace, 2"
-          "$mod shift, 3, split-movetoworkspace, 3"
-          "$mod shift, 4, split-movetoworkspace, 4"
-          "$mod shift, 5, split-movetoworkspace, 5"
-          "$mod shift, 6, split-movetoworkspace, 6"
-          "$mod shift, 7, split-movetoworkspace, 7"
-          "$mod shift, 8, split-movetoworkspace, 8"
-          "$mod shift, 9, split-movetoworkspace, 9"
+          "$mod Shift, 1, split-movetoworkspace, 1"
+          "$mod Shift, 2, split-movetoworkspace, 2"
+          "$mod Shift, 3, split-movetoworkspace, 3"
+          "$mod Shift, 4, split-movetoworkspace, 4"
+          "$mod Shift, 5, split-movetoworkspace, 5"
+          "$mod Shift, 6, split-movetoworkspace, 6"
+          "$mod Shift, 7, split-movetoworkspace, 7"
+          "$mod Shift, 8, split-movetoworkspace, 8"
+          "$mod Shift, 9, split-movetoworkspace, 9"
         ];
         general = {
           gaps_in = 0;
