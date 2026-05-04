@@ -33,6 +33,8 @@
     };
     wayland.windowManager.hyprland = {
       enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       plugins = [
         inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
       ];
@@ -79,24 +81,24 @@
 	  "$mod, R, exec, foot -e yazi"
 	  "$mod, D, exec, noctalia-shell ipc call launcher toggle"
           "$mod, F, exec, fullscreen"
-          "$mod, 1, workspace, 1"
-          "$mod, 2, workspace, 2"
-          "$mod, 3, workspace, 3"
-          "$mod, 4, workspace, 4"
-          "$mod, 5, workspace, 5"
-          "$mod, 6, workspace, 6"
-          "$mod, 7, workspace, 7"
-          "$mod, 8, workspace, 8"
-          "$mod, 9, workspace, 9"
-          "$mod shift, 1, movetoworkspace, 1"
-          "$mod shift, 2, movetoworkspace, 2"
-          "$mod shift, 3, movetoworkspace, 3"
-          "$mod shift, 4, movetoworkspace, 4"
-          "$mod shift, 5, movetoworkspace, 5"
-          "$mod shift, 6, movetoworkspace, 6"
-          "$mod shift, 7, movetoworkspace, 7"
-          "$mod shift, 8, movetoworkspace, 8"
-          "$mod shift, 9, movetoworkspace, 9"
+          "$mod, 1, split-workspace, 1"
+          "$mod, 2, split-workspace, 2"
+          "$mod, 3, split-workspace, 3"
+          "$mod, 4, split-workspace, 4"
+          "$mod, 5, split-workspace, 5"
+          "$mod, 6, split-workspace, 6"
+          "$mod, 7, split-workspace, 7"
+          "$mod, 8, split-workspace, 8"
+          "$mod, 9, split-workspace, 9"
+          "$mod shift, 1, split-movetoworkspace, 1"
+          "$mod shift, 2, split-movetoworkspace, 2"
+          "$mod shift, 3, split-movetoworkspace, 3"
+          "$mod shift, 4, split-movetoworkspace, 4"
+          "$mod shift, 5, split-movetoworkspace, 5"
+          "$mod shift, 6, split-movetoworkspace, 6"
+          "$mod shift, 7, split-movetoworkspace, 7"
+          "$mod shift, 8, split-movetoworkspace, 8"
+          "$mod shift, 9, split-movetoworkspace, 9"
         ];
         general = {
           gaps_in = 0;
