@@ -1,31 +1,42 @@
-{ self, inputs, ... }: {
-  flake.nixosModules.nfs = { pkgs, lib, ... }: {
-    environment.systemPackages = with pkgs; [ nfs-utils ];
-    boot = {
-      supportedFilesystems = [ "nfs" "nfs4" ];
-      kernelModules = [ "nfs" "nfs4" ];
-    };
+{ self, inputs, ... }:
+{
+  flake.nixosModules.nfs =
+    { pkgs, lib, ... }:
+    {
+      environment.systemPackages = with pkgs; [ nfs-utils ];
+      boot = {
+        supportedFilesystems = [
+          "nfs"
+          "nfs4"
+        ];
+        kernelModules = [
+          "nfs"
+          "nfs4"
+        ];
+      };
 
-    services.rpcbind.enable = true;
+      services.rpcbind.enable = true;
 
-    fileSystems."/media/NAS" = {
-      device = "10.1.10.3:/";
-      fsType = "nfs4";
-      options = [
-        "nfsvers=4.2"
-	"noatime"
-	"rsize=65536"
-	"wsize=65536"
+      fileSystems."/media/NAS" = {
+        device = "10.1.10.3:/";
+        fsType = "nfs4";
+        options = [
+          "nfsvers=4.2"
+          "noatime"
+          "rsize=65536"
+          "wsize=65536"
+        ];
+      };
+
+      systemd.automounts = [
+        {
+          where = "/media/NAS";
+          wantedBy = [ "multi-user.target" ];
+          automountConfig = {
+            TimeoutIdleSec = "300";
+            DirectoryMode = "0755";
+          };
+        }
       ];
     };
-
-    systemd.automounts = [{
-      where = "/media/NAS";
-      wantedBy = [ "multi-user.target" ];
-      automountConfig = {
-        TimeoutIdleSec = "300";
-	DirectoryMode = "0755";
-      };
-    }];
-  };
 }
