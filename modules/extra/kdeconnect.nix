@@ -1,7 +1,10 @@
-{ pkgs, ... }: {
-  flake.nixosModules.kdeconnect = { pkgs, ... }: {
-    services = {
-      kdeconnect.enable = true;
+{ ... }:
+{
+  flake.nixosModules.kdeconnect =
+    { pkgs, ... }:
+    {
+      services = {
+        kdeconnect.enable = true;
+      };
     };
-  };
 }

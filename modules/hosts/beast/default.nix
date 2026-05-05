@@ -1,4 +1,5 @@
-{ config, self, inputs, ... }: {
+{ self, inputs, ... }:
+{
   flake.nixosConfigurations.beast = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       audio
@@ -15,31 +16,33 @@
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
-	    browser
-	    media
-	    packages
-            desktop
-            neovim
-            noctalia
-            shell
+          browser
+          media
+          packages
+          desktop
+          neovim
+          noctalia
+          shell
         ];
       }
     ];
   };
 
-  flake.nixosModules.beastConfiguration = { config, pkgs, lib, ... }: {
-    imports = [
-      inputs.home-manager.nixosModules.home-manager
-    ];
+  flake.nixosModules.beastConfiguration =
+    { config, ... }:
+    {
+      imports = [
+        inputs.home-manager.nixosModules.home-manager
+      ];
 
-    networking.hostName = "beast";
-    hardware.graphics.enable = true;
-    services.xserver.videoDrivers = [ "nvidia" ];
-    services.openssh.enable = true;
-    hardware.nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
-      modesetting.enable = true;
-      open = false;
+      networking.hostName = "beast";
+      hardware.graphics.enable = true;
+      services.xserver.videoDrivers = [ "nvidia" ];
+      services.openssh.enable = true;
+      hardware.nvidia = {
+        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+        modesetting.enable = true;
+        open = false;
+      };
     };
-  };
 }

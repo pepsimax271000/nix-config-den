@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   flake.nixosModules.gaming =
     { pkgs, ... }:

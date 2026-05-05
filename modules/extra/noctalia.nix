@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.homeModules.noctalia =
-    { config, pkgs, ... }:
+    { lib, ... }:
     {
       imports = [
         inputs.noctalia.homeModules.default
@@ -29,12 +29,6 @@
                   id = "ControlCenter";
                   useDistroLogo = true;
                 }
-                {
-                  id = "Network";
-                }
-                {
-                  id = "Bluetooth";
-                }
               ];
               center = [
                 {
@@ -48,6 +42,12 @@
                   id = "Tray";
                   drawerEnabled = false;
                   colorizeIcons = true;
+                }
+                {
+                  id = "Network";
+                }
+                {
+                  id = "Bluetooth";
                 }
                 {
                   id = "Volume";
@@ -97,6 +97,10 @@
               };
             }
           ];
+          ui = {
+            fontDefault = lib.mkForce "JetBrainsMono Nerd Font";
+            fontFixed = "JetBrainsMono Nerd Font";
+          };
           dock = {
             enabled = false;
           };

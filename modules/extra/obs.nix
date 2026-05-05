@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   flake.nixosModules.obs =
     { pkgs, ... }:

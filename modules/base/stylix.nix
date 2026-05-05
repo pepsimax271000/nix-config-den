@@ -1,7 +1,7 @@
-{ config, inputs, ... }:
+{ inputs, ... }:
 {
   flake.nixosModules.stylix =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     {
       imports = [
         inputs.stylix.nixosModules.stylix

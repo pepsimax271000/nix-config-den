@@ -1,4 +1,5 @@
-{ config, self, inputs, ... }: {
+{ self, inputs, ... }:
+{
   flake.nixosConfigurations.chell = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       dns
@@ -26,37 +27,39 @@
     ];
   };
 
-  flake.nixosModules.chellConfiguration = { config, pkgs, lib, ... }: {
-    imports = [
-      inputs.home-manager.nixosModules.home-manager
-    ];
+  flake.nixosModules.chellConfiguration =
+    { pkgs, ... }:
+    {
+      imports = [
+        inputs.home-manager.nixosModules.home-manager
+      ];
 
-    boot.kernelParams = [
-      "i915.enable_rc6=1"
-      "i915.enable_fbc=1"
-      "mitigations=off"
-    ];
+      boot.kernelParams = [
+        "i915.enable_rc6=1"
+        "i915.enable_fbc=1"
+        "mitigations=off"
+      ];
 
-    networking.hostName = "chell";
-    services.openssh.enable = true;
+      networking.hostName = "chell";
+      services.openssh.enable = true;
 
-    powerManagement = {
-      enable = true;
-      cpuFreqGovernor = "performance";
-    };
-
-    hardware = {
-      cpu.intel.updateMicrocode = true;
-      graphics = {
+      powerManagement = {
         enable = true;
-        extraPackages = with pkgs; [
-          intel-vaapi-driver
-          libvdpau-va-gl
-          intel-media-driver
-        ];
-        enable32Bit = true;
+        cpuFreqGovernor = "performance";
       };
-      enableAllFirmware = true;
+
+      hardware = {
+        cpu.intel.updateMicrocode = true;
+        graphics = {
+          enable = true;
+          extraPackages = with pkgs; [
+            intel-vaapi-driver
+            libvdpau-va-gl
+            intel-media-driver
+          ];
+          enable32Bit = true;
+        };
+        enableAllFirmware = true;
+      };
     };
-  };
 }

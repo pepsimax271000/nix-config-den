@@ -1,9 +1,4 @@
-{
-  config,
-  self,
-  inputs,
-  ...
-}:
+{ self, inputs, ... }:
 let
   cfg = self.userConfig;
 in

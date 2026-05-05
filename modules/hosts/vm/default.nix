@@ -1,4 +1,5 @@
-{ config, self, inputs, ... }: {
+{ self, inputs, ... }:
+{
   flake.nixosConfigurations.vm = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       audio
@@ -16,8 +17,8 @@
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
-	        browser
-	        packages
+          browser
+          packages
           desktop
           neovim
           noctalia
@@ -27,20 +28,22 @@
     ];
   };
 
-  flake.nixosModules.vmConfiguration = { config, pkgs, lib, ... }: {
-    imports = [
-      inputs.home-manager.nixosModules.home-manager
-    ];
+  flake.nixosModules.vmConfiguration =
+    { ... }:
+    {
+      imports = [
+        inputs.home-manager.nixosModules.home-manager
+      ];
 
-    networking.hostName = "vm";
-    hardware.graphics.enable = true;
-    services.qemuGuest.enable = true;
-    services.openssh.enable = true;
-    boot.loader.systemd-boot.enable = false;
-    boot.loader.efi.canTouchEfiVariables = false;
-    boot.loader.grub = {
-      enable  = true;
-      device  = "/dev/vda";
+      networking.hostName = "vm";
+      hardware.graphics.enable = true;
+      services.qemuGuest.enable = true;
+      services.openssh.enable = true;
+      boot.loader.systemd-boot.enable = false;
+      boot.loader.efi.canTouchEfiVariables = false;
+      boot.loader.grub = {
+        enable = true;
+        device = "/dev/vda";
+      };
     };
-  };
 }

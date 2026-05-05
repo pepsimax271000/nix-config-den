@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ ... }:
 {
   flake.nixosModules.shell =
     { pkgs, ... }:
@@ -15,7 +15,7 @@
     };
 
   flake.homeModules.shell =
-    { pkgs, ... }:
+    { ... }:
     {
       programs = {
         bat.enable = true;
@@ -57,6 +57,7 @@
         fish = {
           enable = true;
           interactiveShellInit = ''
+            fish_config theme choose catppuccin-mocha --color-theme=dark
             set fish_greeting
             function fish_user_key_bindings
               fish_vi_key_bindings
@@ -72,6 +73,30 @@
             	rm -f -- "$tmp"
             end
           '';
+
+          functions = {
+            fish_prompt = {
+              body = ''
+                set -l mocha_blue   \e\[38\;2\;137\;180\;250m
+                set -l mocha_green  \e\[38\;2\;166\;227\;161m
+                set -l mocha_red    \e\[38\;2\;243\;139\;168m
+                set -l reset        \e\[0m
+
+                set -l cwd (prompt_pwd --full-length-dirs 1 --dir-length 1)
+
+                set -l status_color $mocha_green
+                if test $status -ne 0
+                  set status_color $mocha_red
+                end
+
+                if set -q SSH_CONNECTION
+                  echo -s $mocha_blue (hostname) " " $reset $cwd " " $status_color ">" $reset " "
+                else
+                  echo -s $mocha_blue $cwd " " $status_color ">" $reset " "
+                end
+              '';
+            };
+          };
 
           shellAbbrs = {
             "vim" = "nvim";

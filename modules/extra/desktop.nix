@@ -1,7 +1,7 @@
 { inputs, lib, ... }:
 {
   flake.nixosModules.desktop =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     {
       hardware.graphics.enable = true;
       programs.hyprland = {
