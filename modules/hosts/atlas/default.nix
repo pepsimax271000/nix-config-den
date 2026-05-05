@@ -14,12 +14,15 @@
       virtualization
       atlasConfiguration
       atlasHardware
+      atlasDisko
+      inputs.disko.nixosModules.disko
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
           browser
           media
           packages
+          gaming
           desktop
           neovim
           noctalia

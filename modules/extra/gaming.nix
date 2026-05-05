@@ -3,27 +3,6 @@
   flake.nixosModules.gaming =
     { pkgs, ... }:
     {
-      environment.systemPackages = with pkgs; [
-        steamtinkerlaunch
-        wintricks
-        wineWow64Packages.staging
-        gamemode
-        mangohud
-        protonup-qt
-        heroic
-        protontricks
-      ];
-
-      home.packages = with pkgs; [
-        (prismlauncher.override {
-          jdks = [
-            graalvmPackages.graalvm-ce
-            zulu
-            zulu8
-            zulu17
-          ];
-        })
-      ];
       programs = {
         gamemode.enable = true;
         steam = {
@@ -39,5 +18,30 @@
         };
       };
       hardware.steam-hardware.enable = true;
+      environment.systemPackages = with pkgs; [
+        steamtinkerlaunch
+        winetricks
+        wineWow64Packages.staging
+        gamemode
+        mangohud
+        protonup-qt
+        heroic
+        protontricks
+      ];
+    };
+
+  flake.homeModules.gaming =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        (prismlauncher.override {
+          jdks = [
+            graalvmPackages.graalvm-ce
+            zulu
+            zulu8
+            zulu17
+          ];
+        })
+      ];
     };
 }
