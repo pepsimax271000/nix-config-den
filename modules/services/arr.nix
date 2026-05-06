@@ -11,7 +11,7 @@
           reverse_proxy "localhost:8989"
         '';
         "prowlarr.${config.homelab.domain}".extraConfig = ''
-          reverse_proxy "localhost:9696ZZ9696ZZ9696ZZ9696ZZ9696ZZ9696ZZ9696ZZ9696ZZ9696ZZ"
+          reverse_proxy "localhost:9696"
         '';
       };
 

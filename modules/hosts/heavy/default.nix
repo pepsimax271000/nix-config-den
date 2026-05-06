@@ -30,10 +30,6 @@
   flake.nixosModules.heavyConfiguration =
     { config, ... }:
     {
-      imports = [
-        inputs.home-manager.nixosModules.home-manager
-      ];
-
       networking.hostName = "heavy";
       boot = {
         kernelModules = [

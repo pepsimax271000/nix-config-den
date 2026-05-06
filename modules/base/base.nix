@@ -1,7 +1,4 @@
-{ self, inputs, ... }:
-let
-  cfg = self.userConfig;
-in
+{ inputs, ... }:
 {
   flake.nixosModules.base =
     {
@@ -13,13 +10,14 @@ in
     {
       imports = [
         inputs.sops-nix.nixosModules.sops
+        ./userconfig.nix
       ];
 
       users.users = {
         root.hashedPasswordFile = config.sops.secrets.password.path;
-        ${cfg.username} = {
+        ${config.my.username} = {
           isNormalUser = true;
-          home = cfg.homeDir;
+          home = config.my.homeDir;
           extraGroups = [
             "wheel"
             "networkmanager"
@@ -69,8 +67,8 @@ in
 
       networking.networkmanager.enable = true;
 
-      time.timeZone = cfg.timezone;
-      i18n.defaultLocale = cfg.locale;
+      time.timeZone = config.my.timezone;
+      i18n.defaultLocale = config.my.locale;
 
       environment.systemPackages = with pkgs; [
         curl
@@ -87,21 +85,12 @@ in
         wget
       ];
 
-      programs.neovim = {
-        enable = true;
-        viAlias = true;
-        vimAlias = true;
-      };
-
-      fonts = {
-      };
-
       environment.etc."libinput/local-overrides.quirks".text = pkgs.lib.mkForce ''
         [Debounce]
         MatchUdevType=mouse
         ModelBouncingKeys=1
       '';
 
-      system.stateVersion = cfg.stateVersion;
+      system.stateVersion = config.my.stateVersion;
     };
 }

@@ -31,14 +31,9 @@
   flake.nixosModules.beastConfiguration =
     { config, ... }:
     {
-      imports = [
-        inputs.home-manager.nixosModules.home-manager
-      ];
-
       networking.hostName = "beast";
       hardware.graphics.enable = true;
       services.xserver.videoDrivers = [ "nvidia" ];
-      services.openssh.enable = true;
       hardware.nvidia = {
         package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
         modesetting.enable = true;

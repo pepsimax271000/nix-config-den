@@ -1,7 +1,8 @@
-{ self, inputs, ... }:
-let
-  cfg = self.userConfig;
-in
+{
+  config,
+  inputs,
+  ...
+}:
 {
   flake.nixosModules.homeManager =
     { ... }:
@@ -12,21 +13,21 @@ in
 
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.${cfg.username} =
+      home-manager.users.${config.my.username} =
         { ... }:
         {
-          home.stateVersion = cfg.stateVersion;
+          home.stateVersion = config.my.stateVersion;
         };
     };
-  flake.homeModules.${cfg.username} =
+  flake.homeModules.${config.my.username} =
     { ... }:
     {
       programs.home-manager.enable = true;
 
       home = {
-        username = cfg.username;
-        homeDirectory = cfg.homeDir;
-        stateVersion = cfg.stateVersion;
+        username = config.my.username;
+        homeDirectory = config.my.homeDir;
+        stateVersion = config.my.stateVersion;
       };
     };
 }

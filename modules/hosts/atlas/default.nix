@@ -36,9 +36,10 @@
   flake.nixosModules.atlasConfiguration =
     { pkgs, ... }:
     {
-      imports = [
-        inputs.home-manager.nixosModules.home-manager
-      ];
+      home-manager.users.ye.wayland.windowManager.hyprland.settings.input = {
+        accel_profile = "flat";
+        force_no_accel = "false";
+      };
 
       networking.hostName = "atlas";
 

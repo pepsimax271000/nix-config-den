@@ -31,10 +31,6 @@
   flake.nixosModules.vmConfiguration =
     { ... }:
     {
-      imports = [
-        inputs.home-manager.nixosModules.home-manager
-      ];
-
       networking.hostName = "vm";
       hardware.graphics.enable = true;
       services.qemuGuest.enable = true;

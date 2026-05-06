@@ -30,10 +30,6 @@
   flake.nixosModules.chellConfiguration =
     { pkgs, ... }:
     {
-      imports = [
-        inputs.home-manager.nixosModules.home-manager
-      ];
-
       boot.kernelParams = [
         "i915.enable_rc6=1"
         "i915.enable_fbc=1"

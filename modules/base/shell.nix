@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   flake.nixosModules.shell =
     { pkgs, ... }:
@@ -146,7 +146,7 @@
             "nsp" = "nix-shell -p";
             "scg" = "doas nix-collect-garbage -d";
             "ucg" = "nix-collect-garbage -d";
-            "cfg" = "z /home/ye/nix-config/";
+            "cfg" = "z /home/${config.my.username}/nix-config/";
             "rn" = "nh os switch ~/nix-config";
           };
         };

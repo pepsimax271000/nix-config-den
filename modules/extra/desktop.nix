@@ -7,7 +7,6 @@
       fonts = {
         packages = with pkgs; [
           noto-fonts
-          noto-fonts
           noto-fonts-cjk-sans
           noto-fonts-color-emoji
           nerd-fonts.jetbrains-mono
@@ -75,7 +74,7 @@
               on-timeout = "loginctl lock-session";
             }
             {
-              timeout = 1500;
+              timeout = 2700;
               on-timeout = "hyprctl dispatch dpms off";
               on-resume = "hyprctl dispatch dpms on";
             }
@@ -143,7 +142,6 @@
             "$mod, A, exec, noctalia-shell ipc call bar toggle"
             "$mod, S, pin"
             "$mod, D, exec, noctalia-shell ipc call launcher toggle"
-            "$mod, F, exec, fullscreen"
             "$mod, V, exec, noctalia-shell ipc call launcher clipboard"
             "$mod, M, exec, foot -e jellyfin-tui"
             "$mod, 1, split-workspace, 1"
@@ -192,8 +190,6 @@
             };
           };
           input = {
-            accel_profile = "flat";
-            force_no_accel = "true";
             kb_layout = "gb";
             kb_options = "ctrl:nocaps";
             repeat_delay = "300";

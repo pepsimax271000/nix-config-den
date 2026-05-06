@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   flake.nixosModules.virtualization =
     { pkgs, ... }:
@@ -15,7 +15,7 @@
 
       services.spice-vdagentd.enable = true;
 
-      users.users.ye = {
+      users.users.${config.my.username} = {
         extraGroups = [
           "libvirtd"
           "kvm"
