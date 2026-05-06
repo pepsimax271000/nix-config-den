@@ -19,6 +19,10 @@
       };
       hardware.steam-hardware.enable = true;
       environment.systemPackages = with pkgs; [
+        libxtst # for mcsr mod
+        libxinerama
+        waywall
+        zulu
         steamtinkerlaunch
         winetricks
         wineWow64Packages.staging
@@ -35,6 +39,13 @@
     {
       home.packages = with pkgs; [
         (prismlauncher.override {
+          textToSpeechSupport = false;
+          additionalLibs = [
+            libxt
+            libxtst
+            libxkbcommon
+            libxinerama
+          ];
           jdks = [
             graalvmPackages.graalvm-ce
             zulu

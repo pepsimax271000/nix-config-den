@@ -4,6 +4,25 @@
     { pkgs, ... }:
     {
       hardware.graphics.enable = true;
+      fonts = {
+        packages = with pkgs; [
+          noto-fonts
+          noto-fonts
+          noto-fonts-cjk-sans
+          noto-fonts-color-emoji
+          nerd-fonts.jetbrains-mono
+          dejavu_fonts
+          liberation_ttf
+        ];
+        fontconfig = {
+          enable = true;
+          defaultFonts = {
+            monospace = [ "JetBrainsMono Nerd Font" ];
+            sansSerif = [ "Noto Sans" ];
+            serif = [ "Noto Serif" ];
+          };
+        };
+      };
       programs.hyprland = {
         enable = true;
         withUWSM = true;
@@ -75,6 +94,12 @@
         plugins = [
           inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
         ];
+        extraConfig = "
+          monitor=DP-1,3440x1440@165.0,1270x1080,1.0
+          monitor=DP-2,1920x1080@120.0,1963x0,1.0
+          monitor=DP-3,1920x1200@60.0,70x787,1.0
+          monitor=DP-3,transform,3
+          ";
         settings = {
           monitor = ",preffered,auto,1";
           "$mod" = "SUPER";
@@ -142,6 +167,8 @@
           ];
           windowrule = [
             "match:class mpv.*, float 1"
+            "match:class waywall.*, float 1"
+            "match:class java.*, float 1"
             "match:title Open File.*, float 1"
             "match:title Select a File.*, float 1"
             "match:title Choose Wallpaper.*, float 1"
@@ -165,6 +192,8 @@
             };
           };
           input = {
+            accel_profile = "flat";
+            force_no_accel = "true";
             kb_layout = "gb";
             kb_options = "ctrl:nocaps";
             repeat_delay = "300";

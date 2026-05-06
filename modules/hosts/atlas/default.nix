@@ -6,6 +6,7 @@
       base
       desktop
       gaming
+      obs
       git
       nfs
       services
